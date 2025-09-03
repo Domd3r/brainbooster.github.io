@@ -15,12 +15,22 @@ const rankText = document.getElementById("rankText");
 const historyBtn = document.getElementById("historyBtn");
 const historyPanel = document.getElementById("historyPanel");
 const historyList = document.getElementById("historyList");
+const closeHistory = document.getElementById("closeHistory");
+
+const musicBtn = document.getElementById("musicBtn");
+const bgMusic = document.getElementById("bgMusic");
+
+const calcIcon = document.getElementById("calculatorIcon");
+const calculator = document.getElementById("calculator");
+const closeCalc = document.getElementById("closeCalc");
+const calcDisplay = document.getElementById("calcDisplay");
+const calcButtons = document.querySelectorAll(".calc-btn");
 
 let score = 0;
 let currentAnswer = 0;
 let difficulty = 1;
 
-// Start → difficulty selection
+// Start → difficulty
 startBtn.addEventListener("click", () => {
   welcomeScreen.classList.add("hidden");
   difficultyScreen.classList.remove("hidden");
@@ -49,22 +59,17 @@ backBtn.addEventListener("click", () => {
 function generateExample() {
   let a, b, op;
   switch(difficulty) {
-    case 1: // 1. třída (1–10)
-      a = rand(1, 10);
-      b = rand(1, 10);
-      op = Math.random() > 0.5 ? "+" : "-";
-      break;
-    case 2: // 2. třída (1–20)
+    case 1: // 1. stupeň
       a = rand(1, 20);
       b = rand(1, 20);
       op = Math.random() > 0.5 ? "+" : "-";
       break;
-    case 3: // 2. stupeň (násobení, dělení)
+    case 2: // 2. stupeň
       a = rand(2, 12);
       b = rand(2, 12);
       op = Math.random() > 0.5 ? "×" : "÷";
       break;
-    case 4: // SŠ (mocniny, těžší)
+    case 3: // Střední škola
       a = rand(2, 15);
       b = rand(2, 3);
       op = Math.random() > 0.5 ? "^" : "√";
@@ -96,9 +101,12 @@ submitBtn.addEventListener("click", () => {
   generateExample();
 });
 
-// History
+// History toggle
 historyBtn.addEventListener("click", () => {
-  historyPanel.classList.toggle("active");
+  historyPanel.classList.add("active");
+});
+closeHistory.addEventListener("click", () => {
+  historyPanel.classList.remove("active");
 });
 
 function addHistory(entry) {
@@ -119,3 +127,42 @@ function updateRank() {
 function rand(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+// Music
+let isPlaying = false;
+musicBtn.addEventListener("click", () => {
+  if (!isPlaying) {
+    bgMusic.play();
+    musicBtn.textContent = "⏸ Stop hudba";
+    isPlaying = true;
+  } else {
+    bgMusic.pause();
+    musicBtn.textContent = "🎵 Hudba";
+    isPlaying = false;
+  }
+});
+
+// Calculator
+calcIcon.addEventListener("click", () => {
+  calculator.classList.remove("hidden");
+});
+closeCalc.addEventListener("click", () => {
+  calculator.classList.add("hidden");
+});
+
+calcButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    let val = btn.textContent;
+    if (val === "C") {
+      calcDisplay.value = "";
+    } else if (val === "=") {
+      try {
+        calcDisplay.value = eval(calcDisplay.value);
+      } catch {
+        calcDisplay.value = "Error";
+      }
+    } else {
+      calcDisplay.value += val;
+    }
+  });
+});
