@@ -18,10 +18,9 @@
   <div id="difficultyScreen" class="screen hidden">
     <h2>Vyber obtížnost</h2>
     <div class="difficulty-buttons">
-      <button class="btn difficulty" data-level="1">1. třída</button>
-      <button class="btn difficulty" data-level="2">2. třída</button>
-      <button class="btn difficulty" data-level="3">2. stupeň</button>
-      <button class="btn difficulty" data-level="4">Střední škola</button>
+      <button class="btn difficulty" data-level="1">1. stupeň</button>
+      <button class="btn difficulty" data-level="2">2. stupeň</button>
+      <button class="btn difficulty" data-level="3">Střední škola</button>
     </div>
   </div>
 
@@ -29,7 +28,10 @@
   <div id="gameScreen" class="screen hidden">
     <div class="top-bar">
       <button id="backBtn" class="btn small">⬅ Zpět</button>
-      <button id="historyBtn" class="btn small">📜 Historie</button>
+      <div>
+        <button id="musicBtn" class="btn small">🎵 Hudba</button>
+        <button id="historyBtn" class="btn small">📜 Historie</button>
+      </div>
     </div>
     <h2 id="exampleText">Příklad se načítá…</h2>
     <input type="number" id="answerInput" placeholder="Zadej odpověď">
@@ -40,10 +42,15 @@
 
   <!-- History panel -->
   <div id="historyPanel">
-    <h3>📜 Historie</h3>
+    <div class="panel-header">
+      <h3>📜 Historie</h3>
+      <button id="closeHistory" class="btn small">❌</button>
+    </div>
     <ul id="historyList"></ul>
   </div>
 
-  <script src="script.js"></script>
-</body>
-</html>
+  <!-- Calculator -->
+  <div id="calculatorIcon">🧮</div>
+  <div id="calculator" class="hidden">
+    <div class="calc-header">
+      <span>Kalkulačka<
