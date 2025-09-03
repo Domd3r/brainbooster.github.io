@@ -1,0 +1,90 @@
+body {
+  background-color: #434343;
+  color: white;
+  font-family: 'Arial Black', sans-serif;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hidden { display: none; }
+
+.screen {
+  width: 100%;
+  max-width: 600px;
+}
+
+h1, h2, h3 {
+  color: pink;
+}
+
+.btn {
+  background-color: pink;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 30px;
+  margin: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+.btn:hover {
+  background-color: hotpink;
+}
+.btn.small {
+  font-size: 0.9rem;
+  padding: 8px 15px;
+}
+
+.difficulty-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input {
+  padding: 10px;
+  border: 2px solid pink;
+  border-radius: 10px;
+  margin: 15px 0;
+  width: 80%;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.rank {
+  margin-top: 20px;
+  font-size: 1.5rem;
+  color: pink;
+}
+
+/* Top bar */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+/* History panel */
+#historyPanel {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 300px;
+  height: 100%;
+  background: #2c2c2c;
+  color: white;
+  padding: 20px;
+  transition: right 0.3s ease-in-out;
+  overflow-y: auto;
+  z-index: 10;
+}
+#historyPanel.active {
+  right: 0;
+}
+#historyPanel h3 {
+  color: pink;
+}
