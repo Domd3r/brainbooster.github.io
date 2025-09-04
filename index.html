@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BrainBoost 2025</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <!-- Rank (vpravo nahoře) -->
+  <div id="rankBadge" class="rank-badge" title="Tvoje úroveň">🎓 ZAČÁTEČNÍK</div>
+
+  <!-- Žákovská knížka (plovoucí vlevo dole) -->
+  <button id="reportCardBtn" class="fab-left" title="Žákovská knížka">📘</button>
+  <div id="reportCardPanel" class="report-panel">
+    <div class="panel-header">
+      <h3>📘 Žákovská knížka</h3>
+      <button id="closeReport" class="btn small">❌</button>
+    </div>
+    <ul id="reportList" class="report-list"></ul>
+  </div>
+
+  <!-- Uvítací obrazovka -->
+  <div id="welcomeScreen" class="screen active fade">
+    <h1>🧠 BRAINBOOST 2025</h1>
+    <p>Creator: Domder (Dominik Taras)</p>
+    <button id="startBtn" class="btn">▶️ START</button>
+  </div>
+
+  <!-- Výběr obtížnosti -->
+  <div id="difficultyScreen" class="screen fade">
+    <h2>🧩 Vyber obtížnost</h2>
+    <div class="card-grid">
+      <button class="card difficulty" data-level="1">
+        <div class="icon">📗</div>
+        <div class="title">1. stupeň</div>
+        <div class="desc">(1.–5. třída)</div>
+      </button>
+      <button class="card difficulty" data-level="2">
+        <div class="icon">📙</div>
+        <div class="title">2. stupeň</div>
+        <div class="desc">(6.–9. třída)</div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Výběr kategorie -->
+  <div id="categoryScreen" class="screen fade">
+    <h2 id="categoryTitle">Vyber kategorii</h2>
+    <div id="categoryGrid" class="card-grid"></div>
+    <button id="backToDifficulty" class="btn ghost">⬅️ Zpět na obtížnost</button>
+  </div>
+
+  <!-- Herní obrazovka -->
+  <div id="gameScreen" class="screen fade">
+    <div class="top-bar">
+      <button id="backToCategories" class="btn small">⬅ Zpět</button>
+      <div class="top-actions">
+        <button id="musicBtn" class="btn small">🎵 Hudba</button>
+        <button id="historyBtn" class="btn small">📜 Historie</button>
+      </div>
+    </div>
+
+    <div class="task-card">
+      <div id="taskCategoryLabel" class="chip">📌</div>
+      <h2 id="exampleText">Příklad se načítá…</h2>
+      <input type="text" id="answerInput" placeholder="✍️ Zadej odpověď">
+      <button id="submitBtn" class="btn">✅ Odeslat</button>
+      <div id="scoreText" class="muted">Skóre: 0 / 0</div>
+    </div>
+
+    <!-- Progress bar (10 příkladů) -->
+    <div class="progress">
+      <div id="progressBar" class="progress-bar" style="width:0%"></div>
+      <div id="progressLabel" class="progress-label">0 / 10</div>
+    </div>
+  </div>
+
+  <!-- Historie odpovědí -->
+  <div id="historyPanel" class="slide-panel">
+    <div class="panel-header">
+      <h3>📜 Historie</h3>
+      <button id="closeHistory" class="btn small">❌</button>
+    </div>
+    <ul id="historyList"></ul>
+  </div>
+
+  <!-- Kalkulačka -->
+  <div id="calculatorIcon" class="fab-right" title="Kalkulačka">🧮</div>
+  <div id="calculator" class="calc hidden">
+    <div class="calc-header">
+      <span>🧮 Kalkulačka</span>
+      <button id="closeCalc" class="btn small">❌</button>
+    </div>
+    <input type="text" id="calcDisplay" readonly>
+    <div class="calc-buttons">
+      <button class="calc-btn">(</button>
+      <button class="calc-btn">)</button>
+      <button class="calc-btn">C</button>
+      <button class="calc-btn">/</button>
+
+      <button class="calc-btn">7</button>
+      <button class="calc-btn">8</button>
+      <button class="calc-btn">9</button>
+      <button class="calc-btn">*</button>
+
+      <button class="calc-btn">4</button>
+      <button class="calc-btn">5</button>
+      <button class="calc-btn">6</button>
+      <button class="calc-btn">-</button>
+
+      <button class="calc-btn">1</button>
+      <button class="calc-btn">2</button>
+      <button class="calc-btn">3</button>
+      <button class="calc-btn">+</button>
+
+      <button class="calc-btn">0</button>
+      <button class="calc-btn">.</button>
+      <button class="calc-btn">±</button>
+      <button class="calc-btn">=</button>
+    </div>
+  </div>
+
+  <!-- Modal s výsledkem -->
+  <div id="resultModal" class="modal hidden">
+    <div class="modal-content">
+      <h3>🎉 Hotovo!</h3>
+      <p id="resultSummary">Výsledek…</p>
+      <div id="resultGrade" class="big-grade">1</div>
+      <div class="modal-actions">
+        <button id="againBtn" class="btn">🔁 Zkusit znovu</button>
+        <button id="toCategoriesBtn" class="btn ghost">📚 Zpět na kategorie</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hudba na pozadí -->
+  <audio id="bgMusic" loop>
+    <source src="lofi.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
