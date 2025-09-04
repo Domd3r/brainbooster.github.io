@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrainBoost 2025</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-mode">
+  <!-- Welcome screen -->
+  <div id="welcomeScreen" class="screen active">
+    <h1>🧠 BRAINBOOST 2025</h1>
+    <button id="startBtn" class="btn">START</button>
+    <button id="themeBtn" class="btn small">🌞 / 🌙</button>
+  </div>
+
+  <!-- Difficulty selection -->
+  <div id="difficultyScreen" class="screen hidden">
+    <h2>Vyber obtížnost</h2>
+    <button class="btn difficulty" data-level="1">1. stupeň</button>
+    <button class="btn difficulty" data-level="2">2. stupeň</button>
+    <button id="backToWelcome" class="btn small">⬅ Zpět</button>
+  </div>
+
+  <!-- Category selection -->
+  <div id="categoryScreen" class="screen hidden">
+    <h2 id="categoryTitle">Vyber kategorii</h2>
+    <div id="categoryButtons"></div>
+    <button id="backToDiff" class="btn small">⬅ Zpět</button>
+  </div>
+
+  <!-- Game screen -->
+  <div id="gameScreen" class="screen hidden">
+    <div class="top-bar">
+      <button id="backToCat" class="btn small">⬅ Kategorie</button>
+      <div>
+        <button id="historyBtn" class="btn small">📜 Historie</button>
+        <button id="musicBtn" class="btn small">🎵 Hudba</button>
+      </div>
+    </div>
+    <h2 id="exampleText">Příklad se načítá…</h2>
+    <input type="text" id="answerInput" placeholder="✍️ Napiš odpověď, např. 2/3">
+    <button id="submitBtn" class="btn">Odeslat</button>
+    <div id="scoreText">Skóre: 0</div>
+    <div class="progress-container">
+      <div id="progressBar"></div>
+    </div>
+  </div>
+
+  <!-- Result screen -->
+  <div id="resultScreen" class="screen hidden">
+    <h2>Výsledek</h2>
+    <p id="resultText"></p>
+    <button id="backToCat2" class="btn small">⬅ Kategorie</button>
+    <button id="backToDiff2" class="btn small">⬅ Zpět na obtížnost</button>
+  </div>
+
+  <!-- History panel -->
+  <div id="historyPanel" class="slide-panel">
+    <div class="panel-header">
+      <h3>📜 Historie</h3>
+      <button id="closeHistory" class="btn small">❌</button>
+    </div>
+    <ul id="historyList"></ul>
+    <h3>📚 Žákovská kniha</h3>
+    <ul id="gradeBook"></ul>
+  </div>
+
+  <!-- Calculator -->
+  <div id="calculatorIcon">🧮</div>
+  <div id="calculator" class="calc hidden">
+    <div class="calc-header">
+      <span>Kalkulačka</span>
+      <button id="copyCalc" class="btn small">📋</button>
+      <button id="closeCalc" class="btn small">❌</button>
+    </div>
+    <input type="text" id="calcDisplay" readonly>
+    <div class="calc-buttons">
+      <button class="calc-btn">7</button>
+      <button class="calc-btn">8</button>
+      <button class="calc-btn">9</button>
+      <button class="calc-btn">/</button>
+      <button class="calc-btn">4</button>
+      <button class="calc-btn">5</button>
+      <button class="calc-btn">6</button>
+      <button class="calc-btn">*</button>
+      <button class="calc-btn">1</button>
+      <button class="calc-btn">2</button>
+      <button class="calc-btn">3</button>
+      <button class="calc-btn">-</button>
+      <button class="calc-btn">0</button>
+      <button class="calc-btn">.</button>
+      <button class="calc-btn">=</button>
+      <button class="calc-btn">+</button>
+      <button class="calc-btn">(</button>
+      <button class="calc-btn">)</button>
+      <button class="calc-btn">C</button>
+    </div>
+  </div>
+
+  <!-- Background music -->
+  <audio id="bgMusic" loop>
+    <source src="lofi.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
