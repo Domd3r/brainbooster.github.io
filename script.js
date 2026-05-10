@@ -1,100 +1,48 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  closeHistory.addEventListener("click", () => {
-    historyPanel.classList.remove("active");
-  });
+    const li = document.createElement("li");
+    li.textContent = `${exampleText.textContent} = ${answerInput.value} | správně: ${currentAnswer}`;
+    historyList.prepend(li);
 
-  let isPlaying = false;
+    answerInput.value = "";
+    scoreText.textContent = `Skóre: ${correctAnswers}`;
+    progressBar.style.width = `${(currentQuestion/10)*100}%`;
 
-  musicBtn.addEventListener("click", () => {
-    if (!isPlaying) {
-      bgMusic.play();
-      musicBtn.textContent = "⏸ Stop hudba";
-      isPlaying = true;
-    } else {
-      bgMusic.pause();
-      musicBtn.textContent = "🎵 Hudba";
-      isPlaying = false;
-    }
-  });
+    if(currentQuestion < 10) generate();
+    else finish();
+  };
 
-  calcIcon.addEventListener("click", () => {
-    calculator.classList.add("show");
-    calculator.classList.remove("hidden");
-  });
+  function finish(){
+    let grade = correctAnswers===10?"1":correctAnswers>=8?"2":correctAnswers>=6?"3":correctAnswers>=4?"4":"5";
 
-  closeCalc.addEventListener("click", () => {
-    calculator.classList.remove("show");
+    resultText.textContent = `Správně: ${correctAnswers}/10 → známka ${grade}`;
 
-    setTimeout(() => {
-      calculator.classList.add("hidden");
-    }, 400);
-  });
+    const li = document.createElement("li");
+    li.textContent = `${currentCategory}: ${correctAnswers}/10 → ${grade}`;
+    gradeBook.prepend(li);
+
+    showScreen(screens.result);
+  }
+
+  historyBtn.onclick = () => historyPanel.classList.add("active");
+  closeHistory.onclick = () => historyPanel.classList.remove("active");
+
+  musicBtn.onclick = () => {
+    if(bgMusic.paused){ bgMusic.play(); }
+    else bgMusic.pause();
+  };
+
+  calcIcon.onclick = () => calculator.classList.add("show");
+  closeCalc.onclick = () => calculator.classList.remove("show");
+
+  copyCalc.onclick = () => navigator.clipboard.writeText(calcDisplay.value);
 
   calcButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      const val = btn.textContent;
-
-      if (val === "C") {
-        calcDisplay.value = "";
-      } else if (val === "=") {
-        try {
-          calcDisplay.value = Function(`return (${calcDisplay.value})`)();
-        } catch {
-          calcDisplay.value = "Error";
-        }
-      } else {
-        calcDisplay.value += val;
-      }
-    });
+    btn.onclick = () => {
+      if(btn.textContent === "C") calcDisplay.value = "";
+      else if(btn.textContent === "="){
+        try{ calcDisplay.value = eval(calcDisplay.value); }catch{ calcDisplay.value="Error"; }
+      } else calcDisplay.value += btn.textContent;
+    };
   });
-
-  gradebookIcon.addEventListener("click", () => {
-    gradebook.classList.add("active");
-  });
-
-  closeGradebook.addEventListener("click", () => {
-    gradebook.classList.remove("active");
-  });
-
-  function showResults() {
-    let gradeText = "";
-
-    if (correctAnswers === 10) gradeText = "1 (výborně)";
-    else if (correctAnswers >= 8) gradeText = "2 (dobře)";
-    else if (correctAnswers >= 6) gradeText = "3 (dostatečně)";
-    else if (correctAnswers >= 4) gradeText = "4 (slabé)";
-    else gradeText = "5 (nedostatečné)";
-
-    document.getElementById("resultText").innerHTML = `
-      🎯 Správně: ${correctAnswers}/10<br>
-      📘 Známka: ${gradeText}
-    `;
-
-    gradeHistory.push({
-      category: currentCategory,
-      score: correctAnswers,
-      grade: gradeText
-    });
-
-    updateGradebook();
-
-    showScreen(resultsScreen);
-  }
-
-  function updateGradebook() {
-    gradebookList.innerHTML = "";
-
-    gradeHistory.forEach((entry, index) => {
-      const li = document.createElement("li");
-
-      li.innerHTML = `
-        <b>${index + 1}. ${entry.category}</b><br>
-        Skóre: ${entry.score}/10<br>
-        Známka: ${entry.grade}
-      `;
-
-      gradebookList.appendChild(li);
-    });
-  }
 });
